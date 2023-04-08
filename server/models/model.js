@@ -1,8 +1,6 @@
 const pgp = require('pg-promise')();
 const express = require('express');
 
-console.log('made it to model');
-
 //connect to the db
 const connection = {
   port: 5432,
