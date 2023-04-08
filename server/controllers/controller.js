@@ -3,21 +3,20 @@ const model = require('../models/model.js');
 module.exports = {
 
   allProducts: (req, res) => {
-    console.log('in controller function allProducts');
+    let count = req.query.count || null;
+    let pages = req.query.page || null;
+    model.getProducts(req.query, res);
   },
 
   product: (req, res) => {
-    console.log('in controller function product');
-
+    model.getProduct(req.params.product_id, res);
   },
 
   styles: (req, res) => {
-    console.log('in controller function styles');
-
+    model.getStyles(req.params.product_id, res);
   },
 
   related: (req, res) => {
-    console.log('in controller function related');
-
+    model.getRelatedItems(req.params.product_id, res);
   },
 };

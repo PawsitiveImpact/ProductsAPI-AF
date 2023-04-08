@@ -1,22 +1,19 @@
-// const path = require('path');
+require('dotenv').config();
 const express = require('express'); // npm installed
-const cors = require('cors');
 const router = require('./productsRouter.js');
 const controller = require('./controllers/controller.js');
 
 const app = express();
 
 // middleware
-app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// serve files
-// app.use(express.static(path.join(__dirname, '/dist')));
+// route requests. products will have the parameters page and count
+app.use(router);
 
-// route requests
 app.use('/products', controller.allProducts);
 
-app.use('/products/:product_id', router);
 
 // listen on ports
 app.listen(process.env.PORT);
