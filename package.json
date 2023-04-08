@@ -4,7 +4,8 @@
   "description": "packages for products api of sdc",
   "main": "index.js",
   "scripts": {
-    "test": "npm run test"
+    "test": "mocha server/tests/tests.js",
+    "server": "node server/index.js"
   },
   "repository": {
     "type": "git",
@@ -22,5 +23,8 @@
     "express": "^4.18.2",
     "path": "^0.12.7",
     "pg-promise": "^11.4.3"
+  },
+  "devDependencies": {
+    "chakram": "^1.5.0"
   }
 }
