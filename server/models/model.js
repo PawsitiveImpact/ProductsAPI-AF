@@ -24,12 +24,11 @@ module.exports = {
           'feature', features.feature,
           'value', features.value
         )
-      )
-      AS features
+      ) AS features
       FROM products
       JOIN features
-      ON products.id = ${productId}
-      AND products.id = features.product_id
+      ON products.id = 1
+      AND products.id = ${productId}
       GROUP BY products.id;
     `
     db
@@ -45,24 +44,56 @@ module.exports = {
 
   getStyles: (productId, res) => {
     // query for the product's photos, styles, and skus
-  //   jsonb_agg(
 
-  //   )
-  // AS results
+    // let photoQuery = `
+    //   SELECT photos.thumbnail_url
+    //   FROM photos
+    //   WHERE photos.styleid = 1
+    // `;
+
+    // db
+    // .query(photoQuery)
+    // .then((result) => {
+    //   console.log(result);
+    // })
+
+    let skusQuery = `
+
+    `;
+
+    // jsonb_agg(
+    //   json_build_object(
+    //     'url', photos.url,
+    //     'thumbnail', photos.thumbnail_url
+    //   )
+    // ) AS photos
     let query = `
-    SELECT jsonb_agg(
-      json_build_object(
-        'style_id', styles.id,
-        'name', styles.name,
-        'original_price', styles.original_price,
-        'sale_price', styles.sale_price,
-        'default?', styles.default_style
-      )
-    )
-    AS results
+    SELECT
+      styles.productid,
+      jsonb_agg(
+        json_build_object(
+          'style_id', styles.id,
+          'name', styles.name,
+          'original price', styles.original_price,
+          'sale_price', styles.sale_price,
+          'default_style', styles.default_style,
+          'photos', (SELECT jsonb_agg(
+                      json_build_object(
+                        'url', photos.url,
+                        'thumbnail', photos.thumbnail_url
+                      )
+                    ) AS photos
+                    FROM photos
+                    WHERE photos.styleid = styles.id)
+        )
+      ) AS results
     FROM styles
-    WHERE styles.productid = ${productId}
-  `
+    INNER JOIN photos
+    ON styles.id = photos.styleid
+    AND styles.productid = ${productId}
+    GROUP BY styles.productid;
+  `;
+
   db
     .query(query)
     .then((result) => {
@@ -71,7 +102,7 @@ module.exports = {
     .catch((err) => {
       console.error(err);
       res.status(500).json(err);
-    })
+    });
   },
 
   getRelatedItems: (productId, res) => {
