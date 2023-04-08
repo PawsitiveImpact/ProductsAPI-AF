@@ -3,9 +3,9 @@ const model = require('../models/model.js');
 module.exports = {
 
   allProducts: (req, res) => {
-    let count = req.query.count || null;
-    let pages = req.query.page || null;
-    model.getProducts(req.query, res);
+    let count = req.query.count || 5;
+    let page = req.query.page || 1;
+    model.getProducts(count, page, res);
   },
 
   product: (req, res) => {

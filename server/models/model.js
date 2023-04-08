@@ -11,9 +11,22 @@ const db = pgp(connection);
 
 module.exports = {
 
-  getProducts: (req, res) => {
-    // use LIMIT to restrict the number of rows returned
-    console.log('in model all products', req);
+  getProducts: (count, page, res) => {
+    let query = `
+    SELECT * FROM products
+    ORDER BY id ASC
+    OFFSET (${page} - 1) * ${count}
+    LIMIT ${count};
+    `
+    db
+    .query(query)
+    .then((result) => {
+      res.status(200).json(result);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json(err);
+    })
   },
 
   getProduct: (productId, res) => {
@@ -27,14 +40,14 @@ module.exports = {
       ) AS features
       FROM products
       JOIN features
-      ON products.id = 1
+      ON products.id = features.product_id
       AND products.id = ${productId}
       GROUP BY products.id;
     `
     db
       .query(query)
       .then((result) => {
-        res.status(200).json(result[0]);
+        res.status(200).json(result);
       })
       .catch((err) => {
         console.error(err);
@@ -44,29 +57,6 @@ module.exports = {
 
   getStyles: (productId, res) => {
     // query for the product's photos, styles, and skus
-
-    // let photoQuery = `
-    //   SELECT photos.thumbnail_url
-    //   FROM photos
-    //   WHERE photos.styleid = 1
-    // `;
-
-    // db
-    // .query(photoQuery)
-    // .then((result) => {
-    //   console.log(result);
-    // })
-
-    let skusQuery = `
-
-    `;
-
-    // jsonb_agg(
-    //   json_build_object(
-    //     'url', photos.url,
-    //     'thumbnail', photos.thumbnail_url
-    //   )
-    // ) AS photos
     let query = `
     SELECT
       styles.productid,
@@ -77,20 +67,31 @@ module.exports = {
           'original price', styles.original_price,
           'sale_price', styles.sale_price,
           'default_style', styles.default_style,
-          'photos', (SELECT jsonb_agg(
-                      json_build_object(
-                        'url', photos.url,
-                        'thumbnail', photos.thumbnail_url
-                      )
-                    ) AS photos
+          'photos', (SELECT
+                      jsonb_agg(
+                        json_build_object(
+                          'url', photos.url,
+                          'thumbnail', photos.thumbnail_url
+                        )
+                      ) AS photos
                     FROM photos
-                    WHERE photos.styleid = styles.id)
+                    WHERE photos.styleid = styles.id
+                    ),
+          'skus', (SELECT
+                    jsonb_object_agg(
+                        skus.id,
+                        json_build_object(
+                          'size', skus.size,
+                          'quantity', skus.quantity
+                        )
+                    ) AS skus
+                  FROM skus
+                  WHERE skus.styleid = styles.id
+                  )
         )
       ) AS results
     FROM styles
-    INNER JOIN photos
-    ON styles.id = photos.styleid
-    AND styles.productid = ${productId}
+    WHERE styles.productid = ${productId}
     GROUP BY styles.productid;
   `;
 
@@ -107,35 +108,23 @@ module.exports = {
 
   getRelatedItems: (productId, res) => {
     // query for the products related item ids
+    let query = `
+      SELECT jsonb_agg(
+        related.related_product_id
+      ) AS related_ids
+      FROM related
+      WHERE related.current_product_id = ${productId}
+    `
 
-    // use the related item ids to query for each related item's info
-    console.log('in model RI', productId);
-
+    db
+    .query(query)
+    .then((result) => {
+      res.status(200).json(result[0].related_ids);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json(err);
+    });
   },
 
 };
-
-// SELECT styles.productid, (
-//   jsonb_agg(
-//     json_build_object(
-//       'style_id', styles.id,
-//       'name', styles.name,
-//       'original_price', styles.original_price,
-//       'sale_price', styles.sale_price,
-//       'default?', styles.default_style,
-//       (
-//         jsonb_agg(
-//           jsonb_build_object(
-//             'thumbnail_url', photos.thumbnail_url,
-//             'url', photos.url
-//           )
-//         ) AS photos
-//       ),
-//     )
-//   ) AS results
-// ),
-// FROM styles
-// JOIN photos
-// ON styles.productid = ${productId}
-// AND styles.productid = photos.styleid
-// GROUP BY styles.id;
