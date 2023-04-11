@@ -128,4 +128,10 @@ module.exports = {
     });
   },
 
+  postToCart: (data, res) => {
+    // create a row in the cart table with the appropriate columns
+    // columns: id, user_session, product_id, active
+
+  };
+
 };

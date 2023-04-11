@@ -19,4 +19,8 @@ module.exports = {
   related: (req, res) => {
     model.getRelatedItems(req.params.product_id, res);
   },
+
+  cart: (req, res) => {
+    model.postToCart(req.body, res);
+  },
 };

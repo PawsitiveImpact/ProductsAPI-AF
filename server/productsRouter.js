@@ -12,4 +12,7 @@ router.use('/products/:product_id/related', controller.related);
 // route for specific product info. takes product id as param.
 router.use('/products/:product_id', controller.product);
 
+// route for adding to cart
+router.use('/products/cart', controller.cart);
+
 module.exports = router;
