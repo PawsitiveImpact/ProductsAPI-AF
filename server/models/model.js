@@ -15,11 +15,11 @@ module.exports = {
     let query = `
     SELECT * FROM products
     ORDER BY id ASC
-    OFFSET (${page} - 1) * ${count}
-    LIMIT ${count};
+    OFFSET ($1 - 1) * $2
+    LIMIT $2;
     `
     db
-    .query(query)
+    .query(query, [page, count])
     .then((result) => {
       res.status(200).json(result);
     })
@@ -41,11 +41,11 @@ module.exports = {
       FROM products
       JOIN features
       ON products.id = features.product_id
-      AND products.id = ${productId}
+      AND products.id = $1
       GROUP BY products.id;
     `
     db
-      .query(query)
+      .query(query, [productId])
       .then((result) => {
         res.status(200).json(result[0]);
       })
@@ -56,6 +56,7 @@ module.exports = {
   },
 
   getStyles: (productId, res) => {
+    // use a values array to insert a value into the select using $1 to denote the first element in the array
     // query for the product's photos, styles, and skus
     let query = `
     SELECT
@@ -91,12 +92,12 @@ module.exports = {
         )
       ) AS results
     FROM styles
-    WHERE styles.productid = ${productId}
+    WHERE styles.productid = $1
     GROUP BY styles.productid;
   `;
 
   db
-    .query(query)
+    .query(query, [productId])
     .then((result) => {
       res.status(200).json(result);
     })
@@ -113,11 +114,11 @@ module.exports = {
         related.related_product_id
       ) AS related_ids
       FROM related
-      WHERE related.current_product_id = ${productId}
+      WHERE related.current_product_id = $1
     `
 
     db
-    .query(query)
+    .query(query, [productId])
     .then((result) => {
       res.status(200).json(result[0].related_ids);
     })
