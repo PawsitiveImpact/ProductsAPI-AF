@@ -1,10 +1,14 @@
 const pgp = require('pg-promise')();
 const express = require('express');
+require('dotenv').config();
 
 //connect to the db
 const connection = {
-  port: 5432,
-  database: 'products_overview',
+  user: process.env.PGUSER,
+  host: process.env.PGHOST,
+  database: process.env.PGDB,
+  password: process.env.PGPASSWORD,
+  port: process.env.PGPORT,
 };
 
 const db = pgp(connection);
