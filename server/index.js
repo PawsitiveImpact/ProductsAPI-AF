@@ -14,6 +14,10 @@ app.use(router);
 
 app.use('/products', controller.allProducts);
 
+app.get('/loaderio-4db0f95d9b1100bfb9123d6bfc5e0458', (req, res) => {
+  res.send('loaderio-4db0f95d9b1100bfb9123d6bfc5e0458');
+});
+
 
 // listen on ports
 app.listen(process.env.PORT);
