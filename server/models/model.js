@@ -16,6 +16,7 @@ const db = pgp(connection);
 module.exports = {
 
   getProducts: (count, page, res) => {
+    console.log('server model working');
     let query = `
     SELECT * FROM products
     ORDER BY id ASC

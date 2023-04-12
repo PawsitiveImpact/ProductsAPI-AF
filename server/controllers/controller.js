@@ -3,6 +3,7 @@ const model = require('../models/model.js');
 module.exports = {
 
   allProducts: (req, res) => {
+    console.log('server controller working');
     let count = req.query.count || 5;
     let page = req.query.page || 1;
     model.getProducts(count, page, res);
