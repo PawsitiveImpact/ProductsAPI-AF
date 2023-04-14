@@ -1,0 +1,23 @@
+{"v":0,"level":30,"name":"newrelic","hostname":"aidans-air.lan","pid":54495,"time":"2023-04-14T22:55:04.230Z","msg":"Using New Relic for Node.js. Agent version: 9.15.0; Node version: v16.19.0."}
+{"v":0,"level":30,"name":"newrelic","hostname":"aidans-air.lan","pid":54495,"time":"2023-04-14T22:55:04.289Z","msg":"Using LegacyContextManager"}
+{"v":0,"level":30,"name":"newrelic","hostname":"aidans-air.lan","pid":54495,"time":"2023-04-14T22:55:04.291Z","msg":"Adding destroy hook to clean up unresolved promises.","component":"async_hooks"}
+{"v":0,"level":30,"name":"newrelic","hostname":"aidans-air.lan","pid":54495,"time":"2023-04-14T22:55:04.312Z","msg":"Agent state changed from stopped to starting."}
+{"v":0,"level":30,"name":"newrelic","hostname":"aidans-air.lan","pid":54495,"time":"2023-04-14T22:55:04.357Z","msg":"Starting New Relic for Node.js connection process."}
+{"v":0,"level":30,"name":"newrelic","hostname":"aidans-air.lan","pid":54495,"time":"2023-04-14T22:55:04.357Z","msg":"Agent state changed from starting to connecting."}
+{"v":0,"level":30,"name":"newrelic","hostname":"aidans-air.lan","pid":54495,"time":"2023-04-14T22:55:06.608Z","msg":"Agent state changed from connecting to connected."}
+{"v":0,"level":30,"name":"newrelic","hostname":"aidans-air.lan","pid":54495,"time":"2023-04-14T22:55:06.608Z","msg":"Connected to collector-004.newrelic.com:443 with agent run ID BSMLHTrhuQSTADtdID03gx1kOdo8AAgBAAAnIQEAANTfAgQ9N4JoAwAGOS4xNS4wAA5haWRhbnMtYWlyLmxhbgADU0RD.","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"aidans-air.lan","pid":54495,"time":"2023-04-14T22:55:06.608Z","msg":"Reporting to: https://rpm.newrelic.com/accounts/3890464/applications/1027048040","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"aidans-air.lan","pid":54495,"time":"2023-04-14T22:55:06.610Z","msg":"Valid event_harvest_config received. Updating harvest cycles. {\"report_period_ms\":5000,\"harvest_limits\":{\"error_event_data\":8,\"log_event_data\":833,\"analytic_event_data\":833,\"custom_event_data\":250}}"}
+{"v":0,"level":30,"name":"newrelic","hostname":"aidans-air.lan","pid":54495,"time":"2023-04-14T22:55:06.615Z","msg":"Agent state changed from connected to started."}
+{"v":0,"level":30,"name":"newrelic","hostname":"aidans-air.lan","pid":54495,"time":"2023-04-14T22:55:07.616Z","msg":"Starting initial 1000ms harvest."}
+{"v":0,"level":30,"name":"newrelic","hostname":"aidans-air.lan","pid":55128,"time":"2023-04-14T23:10:50.099Z","msg":"Using New Relic for Node.js. Agent version: 9.15.0; Node version: v16.19.0."}
+{"v":0,"level":30,"name":"newrelic","hostname":"aidans-air.lan","pid":55128,"time":"2023-04-14T23:10:50.153Z","msg":"Using LegacyContextManager"}
+{"v":0,"level":30,"name":"newrelic","hostname":"aidans-air.lan","pid":55128,"time":"2023-04-14T23:10:50.156Z","msg":"Adding destroy hook to clean up unresolved promises.","component":"async_hooks"}
+{"v":0,"level":30,"name":"newrelic","hostname":"aidans-air.lan","pid":55128,"time":"2023-04-14T23:10:50.172Z","msg":"Agent state changed from stopped to starting."}
+{"v":0,"level":30,"name":"newrelic","hostname":"aidans-air.lan","pid":55128,"time":"2023-04-14T23:10:50.176Z","msg":"Starting New Relic for Node.js connection process."}
+{"v":0,"level":30,"name":"newrelic","hostname":"aidans-air.lan","pid":55128,"time":"2023-04-14T23:10:50.176Z","msg":"Agent state changed from starting to connecting."}
+{"v":0,"level":30,"name":"newrelic","hostname":"aidans-air.lan","pid":55128,"time":"2023-04-14T23:10:52.343Z","msg":"Agent state changed from connecting to connected."}
+{"v":0,"level":30,"name":"newrelic","hostname":"aidans-air.lan","pid":55128,"time":"2023-04-14T23:10:52.343Z","msg":"Connected to collector-004.newrelic.com:443 with agent run ID BaY3lJuSCGq8ADtdID03gx1kOd3AAAgBAAAnIQEAANdYAgQ9N4JoAwAGOS4xNS4wAA5haWRhbnMtYWlyLmxhbgADU0RD.","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"aidans-air.lan","pid":55128,"time":"2023-04-14T23:10:52.344Z","msg":"Reporting to: https://rpm.newrelic.com/accounts/3890464/applications/1027048040","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"aidans-air.lan","pid":55128,"time":"2023-04-14T23:10:52.347Z","msg":"Valid event_harvest_config received. Updating harvest cycles. {\"report_period_ms\":5000,\"harvest_limits\":{\"error_event_data\":8,\"log_event_data\":833,\"analytic_event_data\":833,\"custom_event_data\":250}}"}
+{"v":0,"level":30,"name":"newrelic","hostname":"aidans-air.lan","pid":55128,"time":"2023-04-14T23:10:52.352Z","msg":"Agent state changed from connected to started."}
