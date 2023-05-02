@@ -60,7 +60,6 @@ module.exports = {
   },
 
   getStyles: (productId, res) => {
-    // use a values array to insert a value into the select using $1 to denote the first element in the array
     // query for the product's photos, styles, and skus
     let query = `
     SELECT
@@ -130,12 +129,6 @@ module.exports = {
       console.error(err);
       res.status(500).json(err);
     });
-  },
-
-  postToCart: (data, res) => {
-    // create a row in the cart table with the appropriate columns
-    // columns: id, user_session, product_id, active
-
-  },
+  }
 
 };
